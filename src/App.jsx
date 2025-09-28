@@ -831,18 +831,16 @@ function App() {
 
           </div>
 
-          {/* Nút mũi tên xuống để chuyển section */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <button
-              onClick={() => scrollToNextSection('quiz')}
-              className="text-yellow-300 hover:text-yellow-400 transition-colors duration-300 hover:scale-110 transform"
-              aria-label="Chuyển đến section tiếp theo"
-            >
-              <ChevronDown className="w-8 h-8" />
-            </button>
-          </div>
-
-        </section>
+            {/* Nút mũi tên xuống để chuyển section */}
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
+              <button
+                onClick={() => scrollToNextSection('doan-ket-quoc-te')}
+                className="text-yellow-300 hover:text-yellow-400 transition-colors duration-300 hover:scale-110 transform"
+                aria-label="Chuyển đến section tiếp theo"
+              >
+                <ChevronDown className="w-8 h-8" />
+              </button>
+            </div>        </section>
 
         {/* Quiz */}
         <section id="quiz" className="py-16 bg-gradient-to-r from-red-900 to-red-800 relative overflow-hidden min-h-screen flex items-center" data-reveal>
@@ -976,7 +974,7 @@ function App() {
             {/* Nút mũi tên xuống */}
             <div className="text-center mt-8">
               <button
-                onClick={() => scrollToNextSection('prove')}
+                onClick={() => scrollToNextSection('quiz')}
                 className="text-yellow-300 hover:text-yellow-400 transition-colors duration-300 hover:scale-110 transform bg-black bg-opacity-30 rounded-full p-3"
                 aria-label="Chuyển đến section tiếp theo"
               >
