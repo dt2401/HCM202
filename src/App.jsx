@@ -610,7 +610,7 @@ function App() {
                     </div>
                   </div>
                   <div className="w-64 h-64 rounded-full overflow-hidden shadow-xl border-4 border-yellow-400 hover:scale-105 transition-all duration-300 flex-shrink-0 animate-float-gentle">
-                    <img src="/5.1.4.png" alt="Điều kiện" className="w-full h-full object-cover" />
+                    <img src="/5.1.4.png" alt="Điều kiện" className="w-full h-full object-cover scale-125" />
                   </div>
                 </div>
               </div>
@@ -957,35 +957,55 @@ function App() {
                       <div className="space-y-6 text-white">
                         <div className="bg-black/50 rounded-2xl p-6 border border-yellow-400/30">
                           <h4 className="text-yellow-300 font-bold text-xl mb-4 flex items-center gap-2">
-                            <span className="bg-yellow-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black">1</span>
-                            Bối cảnh lịch sử và điều kiện cụ thể của Việt Nam
+                            <span className="bg-yellow-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black">I</span>
+                            Vì sao Hồ Chí Minh xác định chủ thể của khối đại đoàn kết dân tộc là toàn thể nhân dân Việt Nam?
                           </h4>
-                          <p className="text-lg leading-relaxed">
-                            Hồ Chí Minh xác định chủ thể đại đoàn kết là <strong className="text-yellow-300">"toàn thể nhân dân Việt Nam"</strong> vì điều kiện cụ thể của nước ta thời kỳ đầu thế kỷ XX:
+                          <p className="text-lg leading-relaxed mb-4">
+                            Việc Hồ Chí Minh xác định chủ thể của khối đại đoàn kết là <strong className="text-yellow-300">"toàn thể nhân dân Việt Nam"</strong> xuất phát từ sự am hiểu sâu sắc về điều kiện lịch sử và xã hội cụ thể của Việt Nam đầu thế kỷ XX:
                           </p>
-                          <ul className="mt-4 space-y-2 text-lg">
-                            <li className="flex items-start gap-3">
-                              <span className="text-yellow-400 text-xl mt-1">•</span>
-                              <span>Giai cấp công nhân Việt Nam còn non trẻ, chưa đông đảo</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="text-yellow-400 text-xl mt-1">•</span>
-                              <span>Nông dân chiếm tuyệt đại đa số dân số (trên 85%)</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="text-yellow-400 text-xl mt-1">•</span>
-                              <span>Nhiệm vụ trước mắt là giải phóng dân tộc khỏi ách thống trị thực dân</span>
-                            </li>
-                          </ul>
+                          
+                          <div className="mb-6">
+                            <h5 className="text-yellow-300 font-bold text-lg mb-3">📍 Đặc điểm cụ thể của xã hội Việt Nam thời kỳ đầu thế kỷ XX:</h5>
+                            <ul className="space-y-3 text-base">
+                              <li className="flex items-start gap-3">
+                                <span className="text-yellow-400 text-xl mt-1">•</span>
+                                <div>
+                                  <strong className="text-yellow-200">Xã hội thuộc địa nửa phong kiến:</strong>
+                                  <span className="text-white"> Mâu thuẫn chủ yếu là giữa toàn thể dân tộc Việt Nam với đế quốc xâm lược và bè lũ tay sai.</span>
+                                </div>
+                              </li>
+                              <li className="flex items-start gap-3">
+                                <span className="text-yellow-400 text-xl mt-1">•</span>
+                                <div>
+                                  <strong className="text-yellow-200">Giai cấp công nhân còn non trẻ:</strong>
+                                  <span className="text-white"> Số lượng ít ỏi, chưa đủ sức mạnh đơn độc để đánh đổ ách thống trị thực dân.</span>
+                                </div>
+                              </li>
+                              <li className="flex items-start gap-3">
+                                <span className="text-yellow-400 text-xl mt-1">•</span>
+                                <div>
+                                  <strong className="text-yellow-200">Nông dân chiếm đại đa số:</strong>
+                                  <span className="text-white"> Hơn 90% dân số, có tinh thần yêu nước nồng nàn và là động lực cách mạng to lớn.</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 border-l-4 border-blue-400">
+                            <h6 className="text-blue-300 font-bold text-base mb-2">🎯 Mối quan hệ giữa giải phóng dân tộc và giải phóng giai cấp:</h6>
+                            <p className="text-blue-100 text-sm leading-relaxed">
+                              Độc lập dân tộc là điều kiện tiên quyết để tiến tới giải phóng giai cấp. Hồ Chí Minh khéo léo kết hợp hai nhiệm vụ này, đặt giải phóng dân tộc lên hàng đầu.
+                            </p>
+                          </div>
                         </div>
 
                         <div className="bg-black/50 rounded-2xl p-8 border border-purple-400/30">
                           <h4 className="text-purple-300 font-bold text-2xl mb-6 flex items-center gap-3">
-                            <span className="bg-purple-400 text-black rounded-full w-10 h-10 flex items-center justify-center text-xl font-black">2</span>
-                            Sự vận dụng sáng tạo chủ nghĩa Marx-Lenin
+                            <span className="bg-purple-400 text-black rounded-full w-10 h-10 flex items-center justify-center text-xl font-black">II</span>
+                            Có đi ngược với quan điểm "Vô sản toàn thế giới, đoàn kết lại" của Marx-Engels không?
                           </h4>
                           <p className="text-xl leading-relaxed mb-6 text-white">
-                            Hồ Chí Minh không đi ngược lại mà <strong className="text-purple-300">vận dụng sáng tạo</strong> quan điểm của Marx-Engels:
+                            Việc Hồ Chí Minh xác định chủ thể đại đoàn kết là toàn thể nhân dân Việt Nam <strong className="text-purple-300">không hề đi ngược lại</strong> mà thực chất là <strong className="text-purple-300">sự vận dụng sáng tạo</strong> chủ nghĩa Marx-Lenin vào điều kiện cụ thể của Việt Nam.
                           </p>
                           
                           {/* So sánh chi tiết */}
@@ -993,83 +1013,62 @@ function App() {
                             <div className="bg-red-500/20 rounded-2xl p-6 border-2 border-red-400/40">
                               <h5 className="text-red-300 font-bold text-xl mb-4 flex items-center gap-3">
                                 <span className="text-2xl">📚</span>
-                                Marx-Engels (Lý thuyết gốc)
+                                Quan điểm của Marx-Engels
                               </h5>
                               <div className="space-y-3">
                                 <p className="text-white text-lg leading-relaxed">
                                   <strong className="text-red-200">"Vô sản toàn thế giới, đoàn kết lại!"</strong>
                                 </p>
-                                <ul className="text-red-100 space-y-2 text-base ml-4">
-                                  <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-2">•</span>
-                                    <span>Áp dụng cho các nước tư bản phát triển</span>
-                                  </li>
-                                  <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-2">•</span>
-                                    <span>Giai cấp công nhân đã phát triển mạnh mẽ</span>
-                                  </li>
-                                  <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-2">•</span>
-                                    <span>Mâu thuẫn chủ yếu: giai cấp công nhân vs tư sản</span>
-                                  </li>
-                                </ul>
+                                <p className="text-red-100 text-base leading-relaxed">
+                                  Khẩu hiệu ra đời trong bối cảnh các nước tư bản phát triển ở châu Âu, nơi mâu thuẫn giữa giai cấp tư sản và vô sản đã trở thành mâu thuẫn chủ yếu và gay gắt nhất.
+                                </p>
                               </div>
                             </div>
                             
                             <div className="bg-green-500/20 rounded-2xl p-6 border-2 border-green-400/40">
                               <h5 className="text-green-300 font-bold text-xl mb-4 flex items-center gap-3">
                                 <span className="text-2xl">🇻🇳</span>
-                                Hồ Chí Minh (Vận dụng sáng tạo)
+                                Sự vận dụng sáng tạo của Hồ Chí Minh
                               </h5>
                               <div className="space-y-3">
                                 <p className="text-white text-lg leading-relaxed">
                                   <strong className="text-green-200">"Đại đoàn kết toàn dân tộc"</strong>
                                 </p>
-                                <ul className="text-green-100 space-y-2 text-base ml-4">
+                                <ul className="text-green-100 space-y-2 text-base">
                                   <li className="flex items-start gap-2">
                                     <span className="text-green-400 mt-2">•</span>
-                                    <span>Phù hợp với nước thuộc địa, nửa phong kiến</span>
+                                    <span>Không cứng nhắc áp dụng y nguyên lý luận Marx-Engels</span>
                                   </li>
                                   <li className="flex items-start gap-2">
                                     <span className="text-green-400 mt-2">•</span>
-                                    <span>Giai cấp công nhân còn non trẻ, ít số lượng</span>
+                                    <span>Hiểu Marx-Lenin là kim chỉ nam cho hành động, không phải giáo điều</span>
                                   </li>
                                   <li className="flex items-start gap-2">
                                     <span className="text-green-400 mt-2">•</span>
-                                    <span>Mâu thuẫn chủ yếu: dân tộc vs thực dân, phong kiến</span>
+                                    <span>Phân tích sâu sắc thực tiễn cách mạng Việt Nam</span>
                                   </li>
                                   <li className="flex items-start gap-2">
                                     <span className="text-green-400 mt-2">•</span>
-                                    <span>Cần đoàn kết tất cả tầng lớp nhân dân yêu nước</span>
+                                    <span>Giai cấp công nhân lãnh đạo nhưng phải liên minh với các tầng lớp khác</span>
                                   </li>
                                 </ul>
                               </div>
                             </div>
                           </div>
                           
-                          {/* Kết luận */}
+                          {/* Điểm tương đồng */}
                           <div className="mt-6 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl p-6 border-l-4 border-purple-400">
                             <div className="flex items-start gap-3">
                               <span className="text-3xl mt-1">🎯</span>
                               <div>
-                                <h6 className="text-purple-300 font-bold text-lg mb-2">Điểm tương đồng:</h6>
+                                <h6 className="text-purple-300 font-bold text-lg mb-2">Mục tiêu chung:</h6>
                                 <p className="text-white text-base leading-relaxed">
-                                  Cả hai đều nhằm mục đích <strong className="text-purple-200">đoàn kết các lực lượng tiến bộ</strong> để đấu tranh giải phóng. 
-                                  Hồ Chí Minh vận dụng linh hoạt lý thuyết Marx-Engels phù hợp với <strong className="text-purple-200">điều kiện cụ thể của Việt Nam</strong>.
+                                  Cả Marx-Engels và Hồ Chí Minh đều nhằm <strong className="text-purple-200">giải phóng con người khỏi mọi áp bức, bóc lột</strong>. 
+                                  Chỉ có điều, <strong className="text-purple-200">con đường và phương pháp thực hiện có sự khác biệt</strong> để phù hợp với điều kiện lịch sử cụ thể.
                                 </p>
                               </div>
                             </div>
                           </div>
-                        </div>
-
-                        <div className="bg-black/50 rounded-2xl p-6 border border-green-400/30">
-                          <h4 className="text-green-300 font-bold text-xl mb-4 flex items-center gap-2">
-                            <span className="bg-green-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black">3</span>
-                            Mối quan hệ giữa giải phóng dân tộc và giai cấp
-                          </h4>
-                          <p className="text-lg leading-relaxed">
-                            Hồ Chí Minh cho rằng trong điều kiện Việt Nam, <strong className="text-green-300">giải phóng dân tộc là nhiệm vụ trước mắt</strong>, tạo điều kiện cho giải phóng giai cấp sau này. Do đó cần đoàn kết tất cả các lực lượng yêu nước, không phân biệt giai cấp, để chống lại kẻ thù chung.
-                          </p>
                         </div>
 
                         <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-400/50">
@@ -1078,7 +1077,7 @@ function App() {
                             Kết luận
                           </h4>
                           <p className="text-lg leading-relaxed">
-                            Tư tưởng đại đoàn kết toàn dân tộc của Hồ Chí Minh không đi ngược lại mà là <strong className="text-yellow-300">sự phát triển sáng tạo</strong> quan điểm của Marx-Engels, phù hợp với điều kiện lịch sử cụ thể của Việt Nam, góp phần quan trọng vào sự thành công của cách mạng Việt Nam.
+                            Tư tưởng đại đoàn kết toàn dân tộc của Hồ Chí Minh là <strong className="text-yellow-300">sự thể hiện rõ nét tầm vóc trí tuệ</strong> và sự vận dụng sáng tạo, linh hoạt chủ nghĩa Marx-Lenin vào hoàn cảnh đặc thù của Việt Nam. Người đã xác định đúng đắn lực lượng cách mạng, tập hợp sức mạnh của toàn dân tộc để thực hiện thắng lợi mục tiêu giải phóng dân tộc, <strong className="text-yellow-300">không đi ngược lại mà là sự phát triển phù hợp</strong> với những nguyên lý cơ bản của chủ nghĩa Marx-Lenin.
                           </p>
                         </div>
                       </div>
@@ -1497,14 +1496,7 @@ function App() {
                 </div>
               </div>
 
-              {/* Các ô còn lại... */}
-              <div className="text-center py-8">
-                <div className="inline-flex items-center gap-4 px-8 py-4 bg-green-500/20 rounded-full border-2 border-green-500/50">
-                  <span className="text-2xl">✅</span>
-                  <span className="text-green-700 font-bold text-xl">CAM KẾT MINH BẠCH HOÀN TOÀN</span>
-                  <span className="text-2xl">🎯</span>
-                </div>
-              </div>
+              
             </div>
           </div>
         </section>
