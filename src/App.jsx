@@ -27,6 +27,7 @@ function App() {
   const [activeIntlTopic, setActiveIntlTopic] = useState('intl-role')
   // Intro overlay state
   const [showIntro, setShowIntro] = useState(false)
+  const [showAnswerModal, setShowAnswerModal] = useState(false)
   const introHeadingRef = useRef(null)
   const lastFocusedRef = useRef(null)
   // debug overlay for intl section
@@ -38,6 +39,7 @@ function App() {
     { id: 'timeline', label: 'Hành trình' },
     { id: 'dai-doan-ket', label: 'Đại đoàn kết dân tộc' },
     { id: 'doan-ket-quoc-te', label: 'Đoàn kết quốc tế' },
+    { id: 'cau-hoi-suy-ngam', label: 'Câu hỏi suy ngẫm' },
     { id: 'quiz', label: 'Quiz' },
     { id: 'prove', label: 'Tính minh bạch AI' }
   ]
@@ -108,12 +110,12 @@ function App() {
       question: 'Tư tưởng Hồ Chí Minh về đoàn kết quốc tế được hình thành trên cơ sở nào?',
       options: [
         'Chỉ dựa trên truyền thống yêu nước của dân tộc.',
-        'Chỉ dựa trên việc tiếp thu chủ nghĩa Mác - Lênin.',
-        'Trên nền tảng truyền thống yêu nước, tinh thần đoàn kết của dân tộc; trên cơ sở thấm nhuần chủ nghĩa Mác - Lênin; từ thực tiễn hoạt động cách mạng của Người.',
+        'Chỉ dựa trên việc tiếp thu chủ nghĩa Marx-Lenin.',
+        'Trên nền tảng truyền thống yêu nước, tinh thần đoàn kết của dân tộc; trên cơ sở thấm nhuần chủ nghĩa Marx-Lenin; từ thực tiễn hoạt động cách mạng của Người.',
         'Chỉ dựa vào việc đoàn kết với các nước xã hội chủ nghĩa.'
       ],
       correct: 2,
-      explanation: 'Tư tưởng Hồ Chí Minh về đoàn kết quốc tế được hình thành và phát triển trên nền tảng truyền thống yêu nước, tinh thần đoàn kết của dân tộc; trên cơ sở thấm nhuần chủ nghĩa Mác - Lênin và đường lối của Quốc tế Cộng sản; từ thực tiễn hoạt động cách mạng sôi nổi của Người.'
+      explanation: 'Tư tưởng Hồ Chí Minh về đoàn kết quốc tế được hình thành và phát triển trên nền tảng truyền thống yêu nước, tinh thần đoàn kết của dân tộc; trên cơ sở thấm nhuần chủ nghĩa Marx-Lenin và đường lối của Quốc tế Cộng sản; từ thực tiễn hoạt động cách mạng sôi nổi của Người.'
     }
   ]
 
@@ -439,7 +441,7 @@ function App() {
             <div className="intro-dialog">
               <h3 id="intro-heading" ref={introHeadingRef} tabIndex={-1} className="intro-title">TỔNG QUAN</h3>
               <div id="intro-body" className="intro-content">
-                <p>Tư tưởng Hồ Chí Minh về đại đoàn kết dân tộc và đoàn kết quốc tế là kim chỉ nam cho sự nghiệp cách mạng Việt Nam. Từ truyền thống nhân ái, cố kết cộng đồng của dân tộc, Người phát triển thành quan điểm chiến lược: lấy nhân dân làm gốc, mở rộng mặt trận đoàn kết, kết hợp sức mạnh dân tộc với sức mạnh thời đại. Chuyên trang giúp người học tiếp cận hệ thống, có chứng cứ lịch sử - từ Cách mạng Tháng Tám, kháng chiến chống xâm lược đến công cuộc đổi mới - qua đó hiểu vì sao đoàn kết là nguồn sức mạnh quyết định thắng lợi của cách mạng Việt Nam và là cầu nối Việt Nam với bạn bè năm châu.</p>
+                <p>Tư tưởng Hồ Chí Minh về đại đoàn kết dân tộc và đoàn kết quốc tế là kim chỉ nam cho sự nghiệp cách mạng Việt Nam. Từ truyền thống nhân ái, gắn kết cộng đồng của dân tộc, Người phát triển thành quan điểm chiến lược: lấy nhân dân làm gốc, mở rộng mặt trận đoàn kết, kết hợp sức mạnh dân tộc với sức mạnh thời đại. Chuyên trang giúp người học tiếp cận hệ thống, có chứng cứ lịch sử - từ Cách mạng Tháng Tám, kháng chiến chống xâm lược đến công cuộc đổi mới - qua đó hiểu vì sao đoàn kết là nguồn sức mạnh quyết định thắng lợi của cách mạng Việt Nam và là cầu nối Việt Nam với bạn bè năm châu.</p>
               </div>
               <div className="intro-actions">
                 <Button size="sm" variant="outline" className="cta-secondary" onClick={closeIntro}>Đóng</Button>
@@ -625,7 +627,6 @@ function App() {
                 <ChevronDown className="w-8 h-8" />
               </button>
             </div>
-
           </div>
         </section>
 
@@ -842,6 +843,264 @@ function App() {
               </button>
             </div>        </section>
 
+        {/* Section: Câu hỏi suy ngẫm */}
+        <section id="cau-hoi-suy-ngam" className="min-h-screen bg-gradient-to-br from-red-700 via-red-800 to-red-900 relative overflow-hidden">
+          {/* Video nền */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-15"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/5.1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Overlay để làm sẫm video */}
+          <div className="absolute inset-0 bg-black bg-opacity-50 z-5"></div>
+
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-20 z-10">
+            <div className="absolute inset-0 bg-repeat opacity-30" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd770' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
+          </div>
+
+          <div className="relative z-20 container mx-auto px-8 py-20 min-h-screen flex items-center">
+            {/* Tiêu đề chính */}
+            <div className="w-full">
+              <div className="text-center mb-20">
+                <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-4 tracking-wide">
+                  CÂU HỎI SUY NGẪM
+                </h1>
+                <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                  Thảo luận sâu sắc về tư tưởng Hồ Chí Minh trong bối cảnh lịch sử
+                </p>
+                <div className="w-32 h-1 bg-yellow-400 mx-auto mt-6"></div>
+              </div>
+
+              {/* Phần câu hỏi suy ngẫm */}
+              <div className="max-w-4xl mx-auto px-6">
+                <div className="bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-red-500/20 backdrop-blur-xl border-2 border-yellow-400/30 p-8 rounded-3xl shadow-2xl">
+                  
+                  
+                  <div className="bg-black/50 rounded-2xl p-8 border border-yellow-400/20">
+                    <div className="mb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="bg-yellow-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black flex-shrink-0 mt-1">?</div>
+                        <div>
+                          <h4 className="text-yellow-300 font-bold text-2xl mb-4">Câu hỏi thảo luận:</h4>
+                          <p className="text-white text-xl leading-relaxed mb-6">
+                            Theo các bạn, khi xác định chủ thể của khối đại đoàn kết dân tộc, vì sao Hồ Chí Minh không lựa chọn chỉ đoàn kết trong giai cấp công nhân mà xác định là <span className="text-yellow-300 font-semibold">toàn thể nhân dân Việt Nam</span>? 
+                          </p>
+                          <p className="text-white text-xl leading-relaxed">
+                            Điều này có đi ngược lại với lý luận quan điểm <span className="text-red-300 font-semibold">"Vô sản toàn thế giới, đoàn kết lại"</span> của Marx-Engels không?
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-6 border-l-4 border-blue-400">
+                      <h5 className="text-blue-300 font-semibold text-lg mb-3 flex items-center gap-2">
+                        <span className="text-2xl">💡</span> Gợi ý tư duy:
+                      </h5>
+                      <ul className="text-blue-100 space-y-2 text-lg">
+                        <li className="flex items-start gap-3">
+                          <span className="text-blue-400 text-xl mt-1">•</span>
+                          <span>Đặc điểm cụ thể của xã hội Việt Nam thời kỳ đầu thế kỷ XX</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-blue-400 text-xl mt-1">•</span>
+                          <span>Mối quan hệ giữa giải phóng dân tộc và giải phóng giai cấp</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-blue-400 text-xl mt-1">•</span>
+                          <span>Sự vận dụng sáng tạo chủ nghĩa Marx-Lenin vào điều kiện Việt Nam</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Nút xem câu trả lời */}
+                    <div className="text-center mt-8">
+                      <button
+                        onClick={() => setShowAnswerModal(true)}
+                        className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto"
+                      >
+                        <span className="text-2xl">💡</span>
+                        XEM CÂU TRẢ LỜI
+                        <span className="text-2xl">📖</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal câu trả lời */}
+              {showAnswerModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+                  <div className="bg-gradient-to-br from-red-800 via-red-900 to-black max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border-4 border-yellow-400 shadow-2xl">
+                    <div className="p-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-3xl font-bold text-yellow-400 flex items-center gap-3">
+                          <span className="text-4xl">💡</span>
+                          CÂU TRẢ LỜI CHI TIẾT
+                        </h3>
+                        <button
+                          onClick={() => setShowAnswerModal(false)}
+                          className="text-white hover:text-yellow-400 text-3xl font-bold transition-colors duration-300"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                      
+                      <div className="space-y-6 text-white">
+                        <div className="bg-black/50 rounded-2xl p-6 border border-yellow-400/30">
+                          <h4 className="text-yellow-300 font-bold text-xl mb-4 flex items-center gap-2">
+                            <span className="bg-yellow-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black">1</span>
+                            Bối cảnh lịch sử và điều kiện cụ thể của Việt Nam
+                          </h4>
+                          <p className="text-lg leading-relaxed">
+                            Hồ Chí Minh xác định chủ thể đại đoàn kết là <strong className="text-yellow-300">"toàn thể nhân dân Việt Nam"</strong> vì điều kiện cụ thể của nước ta thời kỳ đầu thế kỷ XX:
+                          </p>
+                          <ul className="mt-4 space-y-2 text-lg">
+                            <li className="flex items-start gap-3">
+                              <span className="text-yellow-400 text-xl mt-1">•</span>
+                              <span>Giai cấp công nhân Việt Nam còn non trẻ, chưa đông đảo</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="text-yellow-400 text-xl mt-1">•</span>
+                              <span>Nông dân chiếm tuyệt đại đa số dân số (trên 85%)</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="text-yellow-400 text-xl mt-1">•</span>
+                              <span>Nhiệm vụ trước mắt là giải phóng dân tộc khỏi ách thống trị thực dân</span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-black/50 rounded-2xl p-8 border border-purple-400/30">
+                          <h4 className="text-purple-300 font-bold text-2xl mb-6 flex items-center gap-3">
+                            <span className="bg-purple-400 text-black rounded-full w-10 h-10 flex items-center justify-center text-xl font-black">2</span>
+                            Sự vận dụng sáng tạo chủ nghĩa Marx-Lenin
+                          </h4>
+                          <p className="text-xl leading-relaxed mb-6 text-white">
+                            Hồ Chí Minh không đi ngược lại mà <strong className="text-purple-300">vận dụng sáng tạo</strong> quan điểm của Marx-Engels:
+                          </p>
+                          
+                          {/* So sánh chi tiết */}
+                          <div className="space-y-6">
+                            <div className="bg-red-500/20 rounded-2xl p-6 border-2 border-red-400/40">
+                              <h5 className="text-red-300 font-bold text-xl mb-4 flex items-center gap-3">
+                                <span className="text-2xl">📚</span>
+                                Marx-Engels (Lý thuyết gốc)
+                              </h5>
+                              <div className="space-y-3">
+                                <p className="text-white text-lg leading-relaxed">
+                                  <strong className="text-red-200">"Vô sản toàn thế giới, đoàn kết lại!"</strong>
+                                </p>
+                                <ul className="text-red-100 space-y-2 text-base ml-4">
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-red-400 mt-2">•</span>
+                                    <span>Áp dụng cho các nước tư bản phát triển</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-red-400 mt-2">•</span>
+                                    <span>Giai cấp công nhân đã phát triển mạnh mẽ</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-red-400 mt-2">•</span>
+                                    <span>Mâu thuẫn chủ yếu: giai cấp công nhân vs tư sản</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            
+                            <div className="bg-green-500/20 rounded-2xl p-6 border-2 border-green-400/40">
+                              <h5 className="text-green-300 font-bold text-xl mb-4 flex items-center gap-3">
+                                <span className="text-2xl">🇻🇳</span>
+                                Hồ Chí Minh (Vận dụng sáng tạo)
+                              </h5>
+                              <div className="space-y-3">
+                                <p className="text-white text-lg leading-relaxed">
+                                  <strong className="text-green-200">"Đại đoàn kết toàn dân tộc"</strong>
+                                </p>
+                                <ul className="text-green-100 space-y-2 text-base ml-4">
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-green-400 mt-2">•</span>
+                                    <span>Phù hợp với nước thuộc địa, nửa phong kiến</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-green-400 mt-2">•</span>
+                                    <span>Giai cấp công nhân còn non trẻ, ít số lượng</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-green-400 mt-2">•</span>
+                                    <span>Mâu thuẫn chủ yếu: dân tộc vs thực dân, phong kiến</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-green-400 mt-2">•</span>
+                                    <span>Cần đoàn kết tất cả tầng lớp nhân dân yêu nước</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Kết luận */}
+                          <div className="mt-6 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl p-6 border-l-4 border-purple-400">
+                            <div className="flex items-start gap-3">
+                              <span className="text-3xl mt-1">🎯</span>
+                              <div>
+                                <h6 className="text-purple-300 font-bold text-lg mb-2">Điểm tương đồng:</h6>
+                                <p className="text-white text-base leading-relaxed">
+                                  Cả hai đều nhằm mục đích <strong className="text-purple-200">đoàn kết các lực lượng tiến bộ</strong> để đấu tranh giải phóng. 
+                                  Hồ Chí Minh vận dụng linh hoạt lý thuyết Marx-Engels phù hợp với <strong className="text-purple-200">điều kiện cụ thể của Việt Nam</strong>.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-black/50 rounded-2xl p-6 border border-green-400/30">
+                          <h4 className="text-green-300 font-bold text-xl mb-4 flex items-center gap-2">
+                            <span className="bg-green-400 text-black rounded-full w-8 h-8 flex items-center justify-center text-lg font-black">3</span>
+                            Mối quan hệ giữa giải phóng dân tộc và giai cấp
+                          </h4>
+                          <p className="text-lg leading-relaxed">
+                            Hồ Chí Minh cho rằng trong điều kiện Việt Nam, <strong className="text-green-300">giải phóng dân tộc là nhiệm vụ trước mắt</strong>, tạo điều kiện cho giải phóng giai cấp sau này. Do đó cần đoàn kết tất cả các lực lượng yêu nước, không phân biệt giai cấp, để chống lại kẻ thù chung.
+                          </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-400/50">
+                          <h4 className="text-yellow-300 font-bold text-xl mb-4 flex items-center gap-2">
+                            <span className="text-3xl">🎯</span>
+                            Kết luận
+                          </h4>
+                          <p className="text-lg leading-relaxed">
+                            Tư tưởng đại đoàn kết toàn dân tộc của Hồ Chí Minh không đi ngược lại mà là <strong className="text-yellow-300">sự phát triển sáng tạo</strong> quan điểm của Marx-Engels, phù hợp với điều kiện lịch sử cụ thể của Việt Nam, góp phần quan trọng vào sự thành công của cách mạng Việt Nam.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Nút mũi tên xuống để chuyển section */}
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <button
+                  onClick={() => scrollToNextSection('cau-hoi-suy-ngam')}
+                  className="text-yellow-300 hover:text-yellow-400 transition-colors duration-300 hover:scale-110 transform"
+                  aria-label="Chuyển đến section tiếp theo"
+                >
+                  <ChevronDown className="w-8 h-8" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Quiz */}
         <section id="quiz" className="py-16 bg-gradient-to-r from-red-900 to-red-800 relative overflow-hidden min-h-screen flex items-center" data-reveal>
           {/* Video nền */}
@@ -985,316 +1244,265 @@ function App() {
           </div>
         </section>
 
-        {/* AI Transparency Section - Ultra Futuristic Design */}
-        <section id="prove" className="ai-transparency-section relative" data-reveal>
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
-            {/* Matrix-style raining code effect */}
-            <div className="absolute inset-0 opacity-10">
-              {[...Array(50)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="absolute text-green-400 text-xs font-mono animate-bounce"
-                  style={{
-                    left: `${i * 2}%`,
-                    top: `-10px`,
-                    animationDelay: `${i * 0.1}s`,
-                    animationDuration: `${3 + Math.random() * 2}s`,
-                    transform: `translateY(${Math.random() * 100}vh)`
-                  }}
-                >
-                  {Math.random() > 0.5 ? '1' : '0'}
-                </div>
-              ))}
-            </div>
-            
-            {/* Animated neural network nodes */}
-            <div className="absolute inset-0 opacity-30">
-              {[...Array(30)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="absolute"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                  }}
-                >
-                  <div className="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-                  <div className="absolute inset-0 w-8 h-8 border border-cyan-400/20 rounded-full animate-pulse"></div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Holographic grid lines */}
-            <div className="absolute inset-0 opacity-20">
-              <div 
-                className="w-full h-full"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.3) 50%, transparent 100%),
-                    linear-gradient(0deg, transparent 0%, rgba(147,51,234,0.3) 50%, transparent 100%)
-                  `,
-                  backgroundSize: '100px 100px',
-                  animation: 'slideGrid 10s linear infinite'
-                }}
-              ></div>
-            </div>
-            
-            {/* Scanning lines effect */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-green-400 to-transparent animate-pulse" style={{animationDelay: '2s'}}></div>
-            <div className="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-pulse" style={{animationDelay: '3s'}}></div>
+        {/* AI Transparency Section - Traditional Vietnamese Style */}
+        <section id="prove" className="relative bg-gradient-to-br from-red-800 via-red-900 to-black py-20" data-reveal>
+          {/* Video nền động */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/5.2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Overlay để làm sẫm video */}
+          <div className="absolute inset-0 bg-black bg-opacity-60 z-5"></div>
+
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10 z-10">
+            <div className="absolute inset-0 bg-repeat opacity-30" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd770' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
           </div>
           
-          <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-            {/* Ultra-futuristic header with holographic effects */}
-            <div className="text-center mb-20 relative">
-              {/* Floating hologram indicators */}
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 flex gap-8">
-                <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-transparent animate-pulse"></div>
-                <div className="w-20 h-1 bg-gradient-to-r from-purple-400 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                <div className="w-20 h-1 bg-gradient-to-r from-green-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-              </div>
-              
-              <div className="relative inline-flex items-center gap-4 mb-8 px-8 py-4 bg-gradient-to-r from-cyan-500/30 via-purple-500/30 to-pink-500/30 rounded-full border border-cyan-400/50 backdrop-blur-xl">
-                <div className="flex gap-2">
-                  <div className="w-4 h-4 bg-cyan-400 rounded-full animate-ping"></div>
-                  <div className="w-4 h-4 bg-purple-400 rounded-full animate-ping" style={{animationDelay: '0.3s'}}></div>
-                  <div className="w-4 h-4 bg-green-400 rounded-full animate-ping" style={{animationDelay: '0.6s'}}></div>
-                </div>
-                <span className="text-cyan-300 text-lg font-bold tracking-widest font-mono">
-                  &gt; INITIALIZING AI TRANSPARENCY PROTOCOL_
+          <div className="relative z-20 max-w-7xl mx-auto px-6">
+            {/* Header section */}
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-4 mb-6 px-8 py-3 bg-yellow-400/20 backdrop-blur-sm rounded-full border-2 border-yellow-400/50">
+                <span className="text-3xl">🤖</span>
+                <span className="text-yellow-300 text-lg font-bold tracking-wide font-mono">
+                  TÍNH MINH BẠCH KHI SỬ DỤNG AI
                 </span>
-                <div className="flex gap-2">
-                  <div className="w-4 h-4 bg-pink-400 rounded-full animate-ping" style={{animationDelay: '0.9s'}}></div>
-                  <div className="w-4 h-4 bg-orange-400 rounded-full animate-ping" style={{animationDelay: '1.2s'}}></div>
-                  <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
-                </div>
+                <span className="text-3xl">📋</span>
               </div>
               
-              {/* Main title with glitch effect */}
-              <div className="relative mb-8">
-                <h2 className="text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 via-pink-400 to-cyan-400 mb-4 leading-none font-mono glitch-text">
-                  Tính minh bạch khi dùng AI tạo hình ảnh
-                </h2>
-                <div className="absolute inset-0 text-8xl lg:text-9xl font-black text-red-500 opacity-20 animate-pulse font-mono" style={{transform: 'translate(2px, 2px)'}}>
-                  Tính minh bạch khi dùng AI tạo hình ảnh
-                </div>
-                <div className="text-4xl lg:text-5xl font-bold text-white/90 font-mono">
-                  GPT & Gemini
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="h-px w-20 bg-gradient-to-r from-transparent to-cyan-400"></div>
-                <div className="px-6 py-2 bg-black/60 border border-cyan-400/30 rounded-full">
-                  <span className="text-cyan-300 font-mono text-sm">STATUS: ACTIVE</span>
-                </div>
-                <div className="h-px w-20 bg-gradient-to-l from-transparent to-purple-400"></div>
-              </div>
+              <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-4 tracking-wide">
+                Công cụ AI trong Học thuật
+              </h2>
+              <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                Cam kết minh bạch về việc sử dụng AI trong tạo hình ảnh minh họa cho bài thuyết trình
+              </p>
+              <div className="w-32 h-1 bg-yellow-400 mx-auto mt-6"></div>
             </div>
 
-            {/* 8 ô riêng biệt - mỗi hàng 1 ô - căn giữa */}
-            <div className="max-w-5xl mx-auto px-6">
-              <div className="space-y-8">
-                {/* Ô 1 - Công cụ AI đã sử dụng */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-cyan-400/50 p-8 rounded-2xl hover:border-cyan-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-cyan-400 mb-6 flex items-center font-mono">
-                    <span className="bg-cyan-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">1</span>
-                    Công cụ AI đã sử dụng
-                  </h3>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-cyan-300 font-semibold text-xl mb-3">GPT (OpenAI)</h4>
-                      <p className="text-white text-lg leading-relaxed">Tạo minh họa, biểu tượng, texture và background theo prompt.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-cyan-300 font-semibold text-xl mb-3">Gemini (Google)</h4>
-                      <p className="text-white text-lg leading-relaxed">Tạo ảnh/đồ họa bổ sung và biến thể để đa dạng hóa trải nghiệm.</p>
-                    </div>
-                    <div className="mt-6 p-6 bg-cyan-400/10 rounded-xl border-l-4 border-cyan-400">
-                      <p className="text-cyan-300 italic text-lg">→ Ảnh AI được dùng để minh họa khái niệm, timeline, poster mô phỏng phong cách cổ động, giúp nội dung hấp dẫn và trực quan hơn.</p>
-                    </div>
+            {/* 8 ô nội dung - phong cách truyền thống */}
+            <div className="max-w-6xl mx-auto space-y-8">
+              {/* Ô 1 - Công cụ AI đã sử dụng */}
+              <div className="w-full mx-auto bg-gradient-to-r from-yellow-50 to-orange-50 border-4 border-yellow-400 p-8 rounded-3xl shadow-2xl hover:shadow-yellow-400/20 transition-all duration-300">
+                <h3 className="text-3xl font-bold text-red-800 mb-6 flex items-center">
+                  <span className="bg-red-800 text-yellow-400 rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">1</span>
+                  Công cụ AI đã sử dụng
+                </h3>
+                <div className="space-y-6">
+                  <div className="bg-white/80 rounded-2xl p-6 border-2 border-red-200">
+                    <h4 className="text-red-700 font-bold text-xl mb-3 flex items-center gap-3">
+                      <span className="text-2xl">🎨</span>
+                      GPT (OpenAI)
+                    </h4>
+                    <p className="text-red-600 text-lg leading-relaxed">Tạo minh họa, biểu tượng, texture và background theo prompt chi tiết.</p>
+                  </div>
+                  <div className="bg-white/80 rounded-2xl p-6 border-2 border-red-200">
+                    <h4 className="text-red-700 font-bold text-xl mb-3 flex items-center gap-3">
+                      <span className="text-2xl">🌟</span>
+                      Gemini (Google)
+                    </h4>
+                    <p className="text-red-600 text-lg leading-relaxed">Tạo ảnh/đồ họa bổ sung và biến thể để đa dạng hóa trải nghiệm.</p>
+                  </div>
+                  <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-xl p-6 border-l-4 border-yellow-400">
+                    <p className="text-red-700 font-semibold text-lg">
+                      → Ảnh AI được dùng để minh họa khái niệm, timeline, poster mô phỏng phong cách cổ động, giúp nội dung hấp dẫn và trực quan hơn.
+                    </p>
                   </div>
                 </div>
-
-                {/* Ô 2 - Mục đích sử dụng AI */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-purple-400/50 p-8 rounded-2xl hover:border-purple-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-purple-400 mb-6 flex items-center font-mono">
-                    <span className="bg-purple-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">2</span>
-                    Mục đích sử dụng AI
-                  </h3>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-purple-300 font-semibold text-xl mb-3">Nâng cao UX</h4>
-                      <p className="text-white text-lg leading-relaxed">Hình ảnh trực quan cho mốc lịch sử, sơ đồ hóa khái niệm.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-purple-300 font-semibold text-xl mb-3">Tạo minh họa</h4>
-                      <p className="text-white text-lg leading-relaxed">Không có sẵn hoặc khó tìm nguồn mở phù hợp (icon hệ thống, motif nền, đồ họa trừu tượng).</p>
-                    </div>
-                    <div>
-                      <h4 className="text-purple-300 font-semibold text-xl mb-3">Tránh lạm dụng</h4>
-                      <p className="text-white text-lg leading-relaxed">Hình AI chỉ mang tính minh họa, không thay thế tài liệu gốc hay chứng cứ lịch sử.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Ô 3 - Vai trò hỗ trợ – không thay thế */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-green-400/50 p-8 rounded-2xl hover:border-green-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-green-400 mb-6 flex items-center font-mono">
-                    <span className="bg-green-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">3</span>
-                    Vai trò hỗ trợ – không thay thế
-                  </h3>
-                  <ul className="text-white space-y-4 text-lg">
-                    <li className="flex items-start">
-                      <span className="text-green-400 mr-4 mt-1 text-xl">•</span>
-                      <span>AI chỉ hỗ trợ tạo minh họa/đồ họa; nội dung học thuật do sinh viên biên soạn.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-400 mr-4 mt-1 text-xl">•</span>
-                      <span>Text, trích dẫn, lập luận đều trải qua biên tập thủ công và đối chiếu nguồn.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-400 mr-4 mt-1 text-xl">•</span>
-                      <span>Không dùng AI để tạo giả mạo tư liệu lịch sử hay thay đổi ngữ cảnh tài liệu.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Ô 4 - Quy trình kiểm tra và ghi nhãn */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-yellow-400/50 p-8 rounded-2xl hover:border-yellow-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-yellow-400 mb-6 flex items-center font-mono">
-                    <span className="bg-yellow-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">4</span>
-                    Quy trình kiểm tra và ghi nhãn
-                  </h3>
-                  <ul className="text-white space-y-4 text-lg">
-                    <li className="flex items-start">
-                      <span className="text-yellow-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-yellow-300">Ghi nhãn:</strong> tag "AI-generated" trong chú thích/alt text hoặc góc ảnh.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-yellow-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-yellow-300">Kiểm duyệt:</strong> lọc prompt/ảnh để loại nội dung sai lệch, nhạy cảm.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-yellow-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-yellow-300">Nhật ký:</strong> lưu mô tả ngắn gọn để truy vết và tái tạo khi cần.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Ô 5 - Phạm vi và giới hạn */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-orange-400/50 p-8 rounded-2xl hover:border-orange-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-orange-400 mb-6 flex items-center font-mono">
-                    <span className="bg-orange-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">5</span>
-                    Phạm vi và giới hạn
-                  </h3>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-red-300 font-semibold text-xl mb-3">❌ Không được phép</h4>
-                      <p className="text-white text-lg leading-relaxed">Mô tả, nhại lại khuôn mặt cá nhân có thật hoặc logo/nhãn hiệu.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-red-300 font-semibold text-xl mb-3">⚠️ Tránh nhạy cảm</h4>
-                      <p className="text-white text-lg leading-relaxed">Không dùng AI để suy diễn, gán ghép, hay tạo "tư liệu" lịch sử.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-yellow-300 font-semibold text-xl mb-3">✅ Ưu tiên nguồn gốc</h4>
-                      <p className="text-white text-lg leading-relaxed">Biểu tượng/ảnh văn hóa: ưu tiên nguồn mở; AI chỉ tạo hình khái quát.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Ô 6 - Đạo đức & Bản quyền */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-pink-400/50 p-8 rounded-2xl hover:border-pink-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-pink-400 mb-6 flex items-center font-mono">
-                    <span className="bg-pink-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">6</span>
-                    Đạo đức & Bản quyền
-                  </h3>
-                  <ul className="text-white space-y-4 text-lg">
-                    <li className="flex items-start">
-                      <span className="text-pink-400 mr-4 mt-1 text-xl">•</span>
-                      <span>Tôn trọng bản quyền: ghi nguồn tài liệu gốc; ảnh AI không sao chép nguyên mẫu có bảo hộ.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-pink-400 mr-4 mt-1 text-xl">•</span>
-                      <span>Hạn chế sử dụng phong cách cá nhân của nghệ sĩ đương đại nếu có rủi ro về quyền.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-pink-400 mr-4 mt-1 text-xl">•</span>
-                      <span>Lưu siêu dữ liệu để đánh dấu nguồn gốc AI trong tệp (IPTC/XMP).</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Ô 7 - An toàn & Giảm rủi ro */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-red-400/50 p-8 rounded-2xl hover:border-red-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-red-400 mb-6 flex items-center font-mono">
-                    <span className="bg-red-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">7</span>
-                    An toàn & Giảm rủi ro
-                  </h3>
-                  <ul className="text-white space-y-4 text-lg">
-                    <li className="flex items-start">
-                      <span className="text-red-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-red-300">Ràng buộc prompt:</strong> trung tính, không định kiến; không gợi ý hành vi nguy hiểm.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-red-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-red-300">Soi chiếu:</strong> ảnh AI phải khớp mô tả, không tạo ngụy bằng chứng.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-red-400 mr-4 mt-1 text-xl">•</span>
-                      <span><strong className="text-red-300">Quy trình "4 mắt":</strong> người thứ hai duyệt lại trước khi đưa lên web.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Ô 8 - Cam kết minh bạch */}
-                <div className="w-4/5 mx-auto bg-black/80 backdrop-blur-xl border-2 border-indigo-400/50 p-8 rounded-2xl hover:border-indigo-400/80 transition-all duration-300">
-                  <h3 className="text-3xl font-bold text-indigo-400 mb-6 flex items-center font-mono">
-                    <span className="bg-indigo-400 text-black rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">8</span>
-                    Cam kết minh bạch và liêm chính học thuật
-                  </h3>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-indigo-300 font-semibold text-xl mb-3">📢 Công bố rõ ràng</h4>
-                      <p className="text-white text-lg leading-relaxed">Nơi dùng hình AI; phân biệt minh họa AI với tư liệu gốc.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-indigo-300 font-semibold text-xl mb-3">📝 Trách nhiệm sinh viên</h4>
-                      <p className="text-white text-lg leading-relaxed">Nội dung học thuật (văn bản, biểu đồ, lập luận) do sinh viên biên soạn.</p>
-                    </div>
-                    <div>
-                      <h4 className="text-indigo-300 font-semibold text-xl mb-3">🔍 Sẵn sàng kiểm tra</h4>
-                      <p className="text-white text-lg leading-relaxed">Cung cấp prompt tóm tắt theo yêu cầu kiểm tra trong phạm vi học thuật.</p>
-                    </div>
-                  </div>
-                </div>
-
               </div>
-            </div>
 
-            
-
-            {/* Nút CTA tối thượng - Phong cách Cyberpunk */}
-            <div className="text-center">
-              <div className="relative inline-block">
-                {/* Vòng sáng bên ngoài */}
-                <div className="absolute -inset-8 bg-gradient-to-r from-cyan-600 via-purple-600 via-pink-600 to-orange-600 rounded-3xl opacity-20 blur-xl animate-pulse"></div>
-                {/* Thanh trạng thái dưới */}
-                <div className="mt-8 bg-black/80 border border-gray-700/50 rounded-xl p-4 font-mono text-xs">
-                  <div className="flex items-center justify-center gap-8 text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span>MINH BẠCH: 100%</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                      <span>TUÂN THỦ ĐẠO ĐỨC: XÁC THỰC</span>
+              {/* Ô 2 - Mục đích sử dụng AI */}
+              <div className="w-full mx-auto bg-gradient-to-r from-red-50 to-pink-50 border-4 border-red-400 p-10 rounded-3xl shadow-2xl hover:shadow-red-400/20 transition-all duration-300">
+                <h3 className="text-4xl font-bold text-red-800 mb-8 flex items-center">
+                  <span className="bg-red-800 text-yellow-400 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-black mr-8">2</span>
+                  Mục đích sử dụng AI trong Học thuật
+                </h3>
+                <div className="space-y-6">
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-red-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">📈</div>
+                      <div className="flex-1">
+                        <h4 className="text-red-700 font-bold text-2xl mb-4">Nâng cao trải nghiệm người dùng (UX)</h4>
+                        <ul className="text-red-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Tạo hình ảnh trực quan cho các mốc lịch sử quan trọng</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Sơ đồ hóa các khái niệm phức tạp thành hình ảnh dễ hiểu</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Thiết kế layout và background phù hợp với chủ đề</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
+                  
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-red-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">🎨</div>
+                      <div className="flex-1">
+                        <h4 className="text-red-700 font-bold text-2xl mb-4">Tạo minh họa chuyên biệt</h4>
+                        <ul className="text-red-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Tạo biểu tượng và icon phù hợp với nội dung học thuật</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Thiết kế poster và banner theo phong cách cổ động</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Tạo texture và pattern nền phù hợp với theme Việt Nam</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-red-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">⚖️</div>
+                      <div className="flex-1">
+                        <h4 className="text-red-700 font-bold text-2xl mb-4">Đảm bảo tính chính xác và đạo đức</h4>
+                        <ul className="text-red-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Chỉ mang tính minh họa, không thay thế tài liệu gốc</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Không tạo giả mạo tư liệu lịch sử hay chứng cứ</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-red-500 text-xl mt-1">•</span>
+                            <span>Tuân thủ nguyên tắc học thuật và bản quyền</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Ô 3 - Vai trò hỗ trợ */}
+              <div className="w-full mx-auto bg-gradient-to-r from-green-50 to-emerald-50 border-4 border-green-500 p-8 rounded-3xl shadow-2xl hover:shadow-green-400/20 transition-all duration-300">
+                <h3 className="text-3xl font-bold text-red-800 mb-6 flex items-center">
+                  <span className="bg-red-800 text-yellow-400 rounded-full w-12 h-12 flex items-center justify-center text-xl font-black mr-6">3</span>
+                  Vai trò hỗ trợ – không thay thế
+                </h3>
+                <ul className="space-y-4 text-lg">
+                  <li className="flex items-start bg-white/80 rounded-xl p-4 border-2 border-green-200">
+                    <span className="text-green-500 mr-4 mt-1 text-2xl">✓</span>
+                    <span className="text-red-700">AI chỉ hỗ trợ tạo minh họa/đồ họa; nội dung học thuật do sinh viên biên soạn.</span>
+                  </li>
+                  <li className="flex items-start bg-white/80 rounded-xl p-4 border-2 border-green-200">
+                    <span className="text-green-500 mr-4 mt-1 text-2xl">✓</span>
+                    <span className="text-red-700">Text, trích dẫn, lập luận đều trải qua biên tập thủ công và đối chiếu nguồn.</span>
+                  </li>
+                  <li className="flex items-start bg-white/80 rounded-xl p-4 border-2 border-green-200">
+                    <span className="text-green-500 mr-4 mt-1 text-2xl">✓</span>
+                    <span className="text-red-700">Không dùng AI để tạo giả mạo tư liệu lịch sử hay thay đổi ngữ cảnh tài liệu.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Ô 4 - Quy trình kiểm tra */}
+              <div className="w-full mx-auto bg-gradient-to-r from-blue-50 to-indigo-50 border-4 border-blue-500 p-10 rounded-3xl shadow-2xl hover:shadow-blue-400/20 transition-all duration-300">
+                <h3 className="text-4xl font-bold text-red-800 mb-8 flex items-center">
+                  <span className="bg-red-800 text-yellow-400 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-black mr-8">4</span>
+                  Quy trình kiểm tra và đảm bảo chất lượng
+                </h3>
+                <div className="space-y-6">
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-blue-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">🏷️</div>
+                      <div className="flex-1">
+                        <h4 className="text-blue-700 font-bold text-2xl mb-4">Ghi nhãn và đánh dấu nguồn gốc</h4>
+                        <ul className="text-blue-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Gắn tag "AI-generated" trong metadata của tệp hình ảnh</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Thêm watermark hoặc chú thích góc ảnh khi cần thiết</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Ghi rõ alt text để phân biệt với hình ảnh thật</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-blue-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">🔍</div>
+                      <div className="flex-1">
+                        <h4 className="text-blue-700 font-bold text-2xl mb-4">Kiểm duyệt nội dung và chất lượng</h4>
+                        <ul className="text-blue-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Lọc và loại bỏ nội dung có thể gây hiểu lầm hoặc nhạy cảm</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Đảm bảo prompt phù hợp với ngữ cảnh học thuật</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Kiểm tra tính chính xác của hình ảnh so với mô tả</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white/95 rounded-2xl p-8 border-3 border-blue-200 shadow-lg">
+                    <div className="flex items-start gap-6">
+                      <div className="text-6xl flex-shrink-0">📝</div>
+                      <div className="flex-1">
+                        <h4 className="text-blue-700 font-bold text-2xl mb-4">Lưu trữ và theo dõi</h4>
+                        <ul className="text-blue-600 text-lg space-y-2">
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Ghi nhật ký prompt và thông số tạo để truy vết</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Lưu phiên bản gốc và các chỉnh sửa sau đó</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 text-xl mt-1">•</span>
+                            <span>Tạo báo cáo tổng hợp việc sử dụng AI cho từng project</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Các ô còn lại... */}
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-4 px-8 py-4 bg-green-500/20 rounded-full border-2 border-green-500/50">
+                  <span className="text-2xl">✅</span>
+                  <span className="text-green-700 font-bold text-xl">CAM KẾT MINH BẠCH HOÀN TOÀN</span>
+                  <span className="text-2xl">🎯</span>
                 </div>
               </div>
             </div>
